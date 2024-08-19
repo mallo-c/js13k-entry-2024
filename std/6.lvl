@@ -1,0 +1,30 @@
+Scanning
+JSK-13 can check if it can move in a certain direction (ahead, left or right) and do something depending on the answer!
+Let's check out the example:
+
+run
+if scanRight {
+    right
+    run
+}
+
+#########
+#F###.###
+#...#.###
+###.#.###
+###.#.###
+###.#.###
+#.....###
+#####...#
+#######^#
+#########
+
+loop {
+    run
+    if scanLeft {
+        left
+        run
+        run
+        right
+    }
+}

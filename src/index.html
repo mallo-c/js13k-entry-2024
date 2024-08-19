@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thirteens everywhere...</title>
+    <link rel="stylesheet" href="style.scss">
+</head>
+<body>
+    <header>
+        <h3>Thirteens everywhere...</h3>
+        <div id="level"></div>
+        <div class="buttonPanel">
+            <button id="helpButton">Help</button>
+            <button id="storyButton">Show story</button>
+        </div>
+    </header>
+    <main>
+        <div id="codeContainer">
+            <textarea id="code" spellcheck="false" placeholder="Your code goes here..."></textarea>
+        </div>
+        <div id="fieldOuterContainer">
+            <div class="buttonPanel">
+                <button id="runButton">Run</button>
+                <button id="stopButton">Stop</button>
+                <button id="speedButton"></button>
+            </div>
+            <div id="fieldInnerContainer">
+                <div id="field"></div>
+            </div>
+        </div>
+    </main>
+    <script type="module" src="main.ts"></script>
+</body>
+</html>

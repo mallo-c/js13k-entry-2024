@@ -1,0 +1,12 @@
+The <code>run</code> command
+Use the <code>run</code> command to reach the target.
+Consider an example:
+
+run
+
+#####
+#>.F#
+#####
+
+run
+run

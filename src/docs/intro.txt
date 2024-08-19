@@ -1,0 +1,4 @@
+<h1>Hello!</h1>
+<p>You need to reach the flag. You have a robot JSK-13 to do this.</p>
+<p>Unfortunately, the robot has a triskadekaphobia. It means that it is afraid of thirteens and it will break down if he meet one.</p>
+<h2>Good luck!</h2>

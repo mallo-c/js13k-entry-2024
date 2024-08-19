@@ -1,0 +1,19 @@
+Rotation
+Use the <code>left</code> command to turn JSK-13 left, and <code>right</code> command to turn JSK-13 right, like this:
+
+run
+left
+run
+
+#####
+##.F#
+##.##
+#>.##
+#####
+
+run
+left
+run
+run
+right
+run

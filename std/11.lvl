@@ -1,0 +1,24 @@
+Reach the finish
+
+
+##########
+####..####
+###....###
+##..##..##
+#>.####.F#
+##########
+
+loop {
+    run
+    if scanLeft {
+        left
+        run
+        right
+    } else {
+        if scanRight {
+            right
+            run
+            left
+        }
+    }
+}

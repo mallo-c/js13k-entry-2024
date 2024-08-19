@@ -1,0 +1,2 @@
+<h1>Congratulations! You have solved all the tasks!</h1>
+<h2>Goodbye!</h2>

@@ -1,0 +1,158 @@
+$background: #000022;
+$primary: #fff;
+$placeholder: #777;
+$code: #20ccff;
+$scan: #00ff00;
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background: $background;
+    color: $primary;
+    font-family: monospace, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    font-size: 20px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#codeContainer {
+    flex-shrink: 1;
+    flex-basis: 3;
+    flex-grow: 3;
+    height: 100%;
+    margin: 10px;
+}
+#code {
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    resize: none;
+    outline: none!important;
+    border: 1px solid $primary;
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+}
+#fieldOuterContainer {
+    flex-shrink: 0;
+    flex-basis: 2;
+    flex-grow: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+#fieldInnerContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#field{
+    display: grid;
+    img {
+        border: 1px solid $primary;
+        margin: 1px;
+    }
+}
+[placeholder]:empty::before {
+    content: attr(placeholder);
+    color: $placeholder; 
+}
+.buttonPanel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+button {
+    margin: 0 10px;
+    display: inline-block;
+    color: $primary;
+    padding: 2px;
+    border: 1px solid $primary;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
+    &:not(:disabled):hover {
+        background: $primary;
+        color: $background;
+    }
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+    }
+}
+.modal-bg {
+    background: rgba($background, 0.6);
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 65535;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal {
+    background: $background;
+    color: $primary;
+    border: 1px solid $primary;
+    padding: 10px;
+    padding: 20px;
+    overflow: scroll;
+    * {
+        font: inherit;
+        color: inherit;
+    }
+    h1 {
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+    h2 {
+        font-size: 1.2em;
+    }
+    h3 {
+        font-size: 1.1em;
+    }
+    h4, h5, h6 {
+        font-size: 1em;
+    }
+    code {
+        color: $code;
+        border: 1px solid rgba($code, 0.4);
+        background: rgba($color: $code, $alpha: 0.05);
+        border-radius: 2px;
+        padding: 2px;
+    }
+    pre>code {
+        display: block;
+        border-radius: 4px;
+        padding: 8px;
+    }
+}

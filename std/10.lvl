@@ -1,0 +1,26 @@
+Else
+If JSK-13 scanned and found out that the program can't move to certain direction, it can (but not must) do something <code>else</code>!
+Consider an example:
+
+if scanLeft {
+    left
+} else {
+    right
+}
+
+#########
+#,#.#.#F#
+#...#.#.#
+#.###.#.#
+#.....#.#
+#.#####.#
+#.......#
+#########
+
+loop {
+    if scanAhead {
+        run
+    } else {
+        left
+    }
+}
