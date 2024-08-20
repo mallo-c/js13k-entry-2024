@@ -1,5 +1,5 @@
 import {API} from './run'
-import devError from './dev_errors_macro' with {'type': 'macro'};
+import unreachable from './unreachable_macro' with {'type': 'macro'};
 
 export type Direction = 0|90|180|270; // Clockwise, 0 deg is Oy
 export type Point = {
@@ -43,7 +43,7 @@ export class Level implements API, BaseLevel {
             case 270:
                 return [-1, 0];
             default:
-                devError('Not implemented.')();
+                unreachable('Invalid direction')();
         }
     }
     private _isFree(x: number, y: number): boolean {
@@ -79,12 +79,12 @@ export class Level implements API, BaseLevel {
     }
     static deserialize(l: Uint8Array): LevelWithMetadata {
         let tipEnd = l.indexOf(0);
-        if (tipEnd == -1) devError("an invalid data found when deserializing a level: end of tip is not found")();
+        if (tipEnd == -1) unreachable("an invalid data found when deserializing a level: end of tip is not found")();
         let uint8Tip = l.subarray(0, tipEnd);
         let data = l.subarray(tipEnd+1);
         let tip = new TextDecoder().decode(uint8Tip);
         const METADATA_BYTE_SIZE = 8;
-        if (data.length < METADATA_BYTE_SIZE) devError("an invalid data found when deserializing a level: level metadata is not found")();
+        if (data.length < METADATA_BYTE_SIZE) unreachable("an invalid data found when deserializing a level: level metadata is not found")();
         let h = data[0];
         let w = data[1];
         let p: Point & {
@@ -100,7 +100,7 @@ export class Level implements API, BaseLevel {
         }
         let maxCommands = data[7];
         if (data.length != METADATA_BYTE_SIZE+Math.floor((h*w + (8-h*w%8)%8)/8))
-            devError("an invalid data found when deserializing a level: invalid size")();
+            unreachable("an invalid data found when deserializing a level: invalid size")();
         let m = [];
         for (let i=0; i<h; ++i) m.push(Array<boolean>(w).fill(false));
         for (let i=METADATA_BYTE_SIZE; i<data.length; ++i) {

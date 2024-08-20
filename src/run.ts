@@ -1,4 +1,4 @@
-import devError from "./dev_errors_macro";
+import unreachable from "./unreachable_macro";
 
 export module Stmt {
     export type Any = Move|If|Loop;
@@ -142,7 +142,7 @@ export function parse(tokens: Token[]): Stmt.Block {
                     } else if (stack[stack.length-1] == "else_body") {
                         stack.pop();
                         let ifOp = stack.pop() as Stmt.If;
-                        if (ifOp.type != "if") devError(`last parsed must be 'if'`)();
+                        if (ifOp.type != "if") unreachable(`last parsed must be 'if'`)();
                         ifOp.else = parsed.pop();
                     } else if (stack[stack.length-1] == "loop_body") {
                         stack.pop();

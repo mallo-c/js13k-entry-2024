@@ -2,3 +2,4 @@ dist
 .parcel-cache
 dist.zip
 node_modules
+package-lock.json
