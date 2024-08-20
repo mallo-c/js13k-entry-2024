@@ -161,12 +161,12 @@ export function parse(tokens: Token[]): Stmt.Block {
     return parsed.flat();
 }
 
-async function _internal_run(code: Stmt.Block, api: API): Promise<void> {
+export async function run(code: Stmt.Block, api: API): Promise<void> {
     for (let cmd of code) {
         if (api.beforeStep) await api.beforeStep();
         if (cmd.type == "if") {
-            if (await (api[cmd.cond])()) await _internal_run(cmd.body, api);
-            else if(cmd.else !== null) await _internal_run(cmd.else, api);
+            if (await (api[cmd.cond])()) await run(cmd.body, api);
+            else if(cmd.else !== null) await run(cmd.else, api);
         } else if (cmd.type == "move") {
             switch (cmd.action) {
                 case "left":
@@ -180,12 +180,8 @@ async function _internal_run(code: Stmt.Block, api: API): Promise<void> {
                     break;
             }
         } else if (cmd.type == "loop") {
-            while(!api.isFinish()) await _internal_run(cmd.body, api);
+            while(!api.isFinish()) await run(cmd.body, api);
         }
         if (api.afterStep) await api.afterStep();
     }
-}
-
-export async function run(code: Stmt.Block, api: API): Promise<void> {
-    await _internal_run(code, api);
 }
