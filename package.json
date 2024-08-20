@@ -4,10 +4,14 @@
   "source": "src/index.html",
   "license": "MIT",
   "scripts": {
-    "build:assets": "rm -rf dist && parcel build --no-source-maps --public-url .",
+    "clean": "rm -rf dist",
+    "build:assets": "yarn clean && parcel build --no-source-maps --public-url .",
     "build:zip": "node build-script/zip.js",
     "build": "yarn build:assets && yarn build:zip",
-    "start": "parcel"
+    "start": "parcel",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "format": "prettier . --write"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
