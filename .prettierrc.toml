@@ -1,0 +1,5 @@
+semi = true
+quoteProps = "consistent"
+trailingComma = "none"
+bracketSpacing = false
+htmlWhitespaceSensitivity = "ignore"
