@@ -1,9 +1,9 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "lib": ["esnext", "dom"],
-    "module": "ESNext",
-    "outDir": "lib"
-  },
-  "include": ["src/run.ts", "src/level.ts"]
+    "compilerOptions": {
+        "target": "esnext",
+        "lib": ["esnext", "dom"],
+        "module": "ESNext",
+        "outDir": "lib"
+    },
+    "include": ["src/run.ts", "src/level.ts"]
 }
