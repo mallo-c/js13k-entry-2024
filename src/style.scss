@@ -59,22 +59,22 @@ main {
     height: 100%;
 }
 #codeInfo {
-  background: $panel;
-  color: $primary;
-  font-size: 0.7em;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: stretch;
-  padding: 0 10px;
+    background: $panel;
+    color: $primary;
+    font-size: 0.7em;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: stretch;
+    padding: 0 10px;
 
-  span {
-    display: inline-block;
-  }
+    span {
+        display: inline-block;
+    }
 
-  .label {
-    font-weight: bold;
-  }
+    .label {
+        font-weight: bold;
+    }
 }
 #fieldOuterContainer {
     flex-shrink: 0;

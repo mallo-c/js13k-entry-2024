@@ -14,21 +14,24 @@ const codeInfo = {
 
 const codeEditor = document.getElementById("code")! as HTMLTextAreaElement;
 
-codeEditor.addEventListener("input", (e)=>{
+codeEditor.addEventListener("input", () => {
     codeInfo.commandCount.innerText = countCommands(tokenize(codeEditor.value)).toString();
-})
+});
 
-codeEditor.addEventListener("keydown", (e)=>{
+codeEditor.addEventListener("keydown", (e) => {
     if (e.key == "Tab") {
         e.preventDefault();
         if (codeEditor.selectionStart == codeEditor.selectionEnd) {
-            let newCaretPos = codeEditor.selectionStart+4;
-            codeEditor.value = codeEditor.value.substring(0, codeEditor.selectionStart) + "    " + codeEditor.value.substring(codeEditor.selectionStart, codeEditor.value.length);
+            const newCaretPos = codeEditor.selectionStart + 4;
+            codeEditor.value =
+                codeEditor.value.substring(0, codeEditor.selectionStart) +
+                "    " +
+                codeEditor.value.substring(codeEditor.selectionStart, codeEditor.value.length);
             codeEditor.selectionStart = newCaretPos;
             codeEditor.selectionEnd = newCaretPos;
         }
     }
-})
+});
 
 const field = document.getElementById("field")!;
 const currentLevelDisplay = document.getElementById("level")!;
@@ -76,7 +79,7 @@ async function startCode() {
         errorPrefix = "JSK-13 does not understand you: ";
         const tok = tokenize(codeEditor.value);
         const p = parse(tok);
-        let count = countCommands(tok);
+        const count = countCommands(tok);
         errorPrefix = "Pre-check failed: ";
         if (count == 0) throw new Error("your program doesn't do anything");
         errorPrefix = "Runtime error: ";
