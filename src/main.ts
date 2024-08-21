@@ -1,5 +1,5 @@
 import {Level, LevelWithMetadata} from "./level";
-import {parse, run, tokenize} from "./run";
+import {API, parse, run, tokenize} from "./run";
 import {standardLevels} from "./standard_levels";
 import showModal from "./modal";
 import {arePointsMatch, delay, Box} from "./utils";
@@ -20,6 +20,7 @@ const buttons = {
 };
 buttons.speed.innerText = "SPEED: slow";
 buttons.stop.disabled = true;
+
 buttons.stop.addEventListener("click", () => {
     programStopped.$ = true;
 });
@@ -80,11 +81,9 @@ function resetLevel() {
 }
 
 function patchLevel() {
-    const lev = currentLevel.$!.level;
+    const lev = currentLevel.$!.level as API;
     // Patch the Level to add auto-redraw and stop
-    // @ts-expect-error patching the level
     lev.beforeStep = async () => await delay(fast.$ ? 30 : 300);
-    // @ts-expect-error patching the level
     lev.afterStep = () => {
         drawLevel();
         if (programStopped.$) {
