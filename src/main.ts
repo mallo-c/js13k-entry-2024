@@ -1,3 +1,7 @@
+// Because VS Code is an idiot and thinks that "bundle-text:" is undefined
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference path="./bundle-text.d.ts" />
+
 import {Level, LevelWithMetadata} from "./level";
 import {API, parse, run, Token, tokenize} from "./run";
 import {standardLevels} from "./standard_levels";
