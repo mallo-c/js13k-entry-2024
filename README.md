@@ -5,6 +5,8 @@ Unfortunately, the robot has a triskadekaphobia. It means that it is afraid of t
 
 Write a program for the robot and reach flags!
 
+![Screenshot](static/screenshot.png)
+
 # How to build
 You'll need Python 3 to build the game.
 ```
