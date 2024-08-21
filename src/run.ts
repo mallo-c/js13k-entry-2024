@@ -8,16 +8,18 @@ export interface Token {
     line: number;
 }
 
+type Awaitable<T> = T | Promise<T>;
+
 export interface API {
-    left(): void | Promise<void>;
-    right(): void | Promise<void>;
-    run(): void | Promise<void>;
-    scanLeft(): boolean | Promise<boolean>;
-    scanRight(): boolean | Promise<boolean>;
-    scanAhead(): boolean | Promise<boolean>;
-    isFinish(): boolean | Promise<boolean>;
-    beforeStep?(): void | Promise<void>;
-    afterStep?(): void | Promise<void>;
+    left(): Awaitable<void>;
+    right(): Awaitable<void>;
+    run(): Awaitable<void>;
+    scanLeft(): Awaitable<boolean>;
+    scanRight(): Awaitable<boolean>;
+    scanAhead(): Awaitable<boolean>;
+    isFinish(): Awaitable<boolean>;
+    beforeStep?(): Awaitable<void>;
+    afterStep?(): Awaitable<void>;
 }
 
 export interface ParseError extends Error {
