@@ -2,7 +2,7 @@ import type {MacroContext} from "@parcel/macros";
 import * as fs from "node:fs";
 import * as ch from "node:child_process";
 
-export function stdLevel(this: MacroContext | void, id: string) {
+export function standardLevel(this: MacroContext | void, id: string) {
   if (this) {
     this.invalidateOnFileChange(`std/${id}.lvl`);
     this.invalidateOnFileChange(`std/serialize.py`);

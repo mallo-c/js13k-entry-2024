@@ -2,7 +2,7 @@ import {Level, LevelWithMetadata} from "./level";
 import {parse, run, tokenize} from "./run";
 import {standardLevels} from "./standard_levels";
 import showModal from "./modal";
-import {arePointsMatch, delay, Box, nop} from "./utils";
+import {arePointsMatch, delay, Box} from "./utils";
 
 import intro from "bundle-text:./docs/intro.txt";
 import next from "bundle-text:./docs/next.txt";
@@ -23,8 +23,8 @@ buttons.stop.disabled = true;
 buttons.stop.addEventListener("click", () => {
   programStopped.$ = true;
 });
-buttons.help.addEventListener("click", () => showModal(currentLevel.$!.tip, {OK: nop}));
-buttons.story.addEventListener("click", () => showModal(intro, {OK: nop}));
+buttons.help.addEventListener("click", () => showModal(currentLevel.$!.tip, {OK: () => void 0}));
+buttons.story.addEventListener("click", () => showModal(intro, {OK: () => void 0}));
 buttons.run.addEventListener("click", () => startCode());
 buttons.speed.addEventListener("click", () => {
   if (fast.$) buttons.speed.innerText = "SPEED: slow";
@@ -59,10 +59,12 @@ async function startCode() {
     buttons.run.disabled = false;
     await delay(500);
     if (standardLevels[currentLevel.$!.id + 1] != undefined && currentLevel.$!.id + 1 != 13)
-      await showModal("<p>Congratulations, you have reached the flag! Proceed to the next level?</p>", {Go: nop});
+      await showModal("<p>Congratulations, you have reached the flag! Proceed to the next level?</p>", {
+        Go: () => void 0
+      });
     await startLevel(currentLevel.$!.id + 1);
   } catch (e) {
-    await showModal(errorPrefix + (e as Error).message, {OK: nop});
+    await showModal(errorPrefix + (e as Error).message, {OK: () => void 0});
     resetLevel();
     buttons.stop.disabled = true;
     buttons.run.disabled = false;
@@ -113,7 +115,7 @@ async function startLevel(id: number) {
     currentLevelDisplay.innerText = "Level " + (id + 1);
   }
   localStorage.setItem("thirteens_everywhere__level", id.toString());
-  await showModal(lev.tip, {OK: nop});
+  await showModal(lev.tip, {OK: () => void 0});
   drawLevel();
   patchLevel();
 }
@@ -148,7 +150,7 @@ function drawLevel() {
 
 document.body.onload = () => {
   (async function () {
-    if (!localStorage.getItem("thirteens_everywhere__level")) await showModal(intro, {OK: nop});
+    if (!localStorage.getItem("thirteens_everywhere__level")) await showModal(intro, {OK: () => void 0});
     await startLevel(parseInt(localStorage.getItem("thirteens_everywhere__level") ?? "0"));
   })();
 };

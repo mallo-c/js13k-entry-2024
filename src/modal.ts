@@ -20,6 +20,7 @@ function showModalSync(text: string, buttons: {[key: string]: () => void}): void
   modalBg.appendChild(modalWindow);
   document.body.appendChild(modalBg);
 }
+
 export default async function showModal<T>(text: string, buttons: {[key: string]: () => T}): Promise<T> {
   return new Promise((resolve) => {
     const newButtons: {[key: string]: () => void} = {};
