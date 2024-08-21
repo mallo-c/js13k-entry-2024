@@ -18,6 +18,18 @@ codeEditor.addEventListener("input", (e)=>{
     codeInfo.commandCount.innerText = countCommands(tokenize(codeEditor.value)).toString();
 })
 
+codeEditor.addEventListener("keydown", (e)=>{
+    if (e.key == "Tab") {
+        e.preventDefault();
+        if (codeEditor.selectionStart == codeEditor.selectionEnd) {
+            let newCaretPos = codeEditor.selectionStart+4;
+            codeEditor.value = codeEditor.value.substring(0, codeEditor.selectionStart) + "    " + codeEditor.value.substring(codeEditor.selectionStart, codeEditor.value.length);
+            codeEditor.selectionStart = newCaretPos;
+            codeEditor.selectionEnd = newCaretPos;
+        }
+    }
+})
+
 const field = document.getElementById("field")!;
 const currentLevelDisplay = document.getElementById("level")!;
 
