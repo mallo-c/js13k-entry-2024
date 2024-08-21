@@ -1,5 +1,5 @@
 import {Level, LevelWithMetadata} from "./level";
-import {API, parse, run, tokenize} from "./run";
+import {API, parse, run, Token, tokenize} from "./run";
 import {standardLevels} from "./standard_levels";
 import showModal from "./modal";
 import {arePointsMatch, delay, Box} from "./utils";
@@ -7,9 +7,20 @@ import {arePointsMatch, delay, Box} from "./utils";
 import intro from "bundle-text:./docs/intro.txt";
 import next from "bundle-text:./docs/next.txt";
 
+const codeInfo = {
+    commandCount: document.getElementById("commandCount")!,
+    commandTotal: document.getElementById("commandTotal")!
+};
+
 const codeEditor = document.getElementById("code")! as HTMLTextAreaElement;
+
+codeEditor.addEventListener("input", (e)=>{
+    codeInfo.commandCount.innerText = countCommands(tokenize(codeEditor.value)).toString();
+})
+
 const field = document.getElementById("field")!;
 const currentLevelDisplay = document.getElementById("level")!;
+
 const buttons = {
     run: document.getElementById("runButton")! as HTMLButtonElement,
     help: document.getElementById("helpButton")! as HTMLButtonElement,
@@ -37,6 +48,14 @@ const currentLevel = new Box<(LevelWithMetadata & {id: number}) | null>(null);
 const programStopped = new Box(false);
 const fast = new Box(false);
 
+function countCommands(tok: Token[]): number {
+    let count = 0;
+    for (const token of tok) {
+        if (Array.of("left", "right", "run", "scanLeft", "scanRight", "scanAhead").indexOf(token.token) != -1) count++;
+    }
+    return count;
+}
+
 async function startCode() {
     buttons.run.disabled = true;
     buttons.stop.disabled = false;
@@ -45,10 +64,7 @@ async function startCode() {
         errorPrefix = "JSK-13 does not understand you: ";
         const tok = tokenize(codeEditor.value);
         const p = parse(tok);
-        let count = 0;
-        for (const token of tok) {
-            if (Array.of("left", "right", "run").indexOf(token.token) != -1) count++;
-        }
+        let count = countCommands(tok);
         errorPrefix = "Pre-check failed: ";
         if (count == 0) throw new Error("your program doesn't do anything");
         errorPrefix = "Runtime error: ";
@@ -97,12 +113,15 @@ async function startLevel(id: number) {
     codeEditor.value = "";
     currentLevelDisplay.innerText = "";
     field.innerText = "";
+    codeInfo.commandTotal.innerHTML = "&infin;";
+    codeInfo.commandCount.innerText = "0";
     if (standardLevels[id] === undefined) {
         await showModal(next, {});
         return;
     }
     const lev = Level.deserialize(Uint8Array.from(standardLevels[id]));
     currentLevel.$ = {id, ...lev};
+    codeInfo.commandTotal.innerText = lev.maxCommands.toString();
     if (id + 1 == 13) {
         const phobia = await showModal("Do you have triskadekaphobia?", {
             Yes: () => true,
