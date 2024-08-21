@@ -1,9 +1,19 @@
 #!/usr/bin/env python3
 from functools import reduce
-from itertools import batched, chain, cycle, islice
+from itertools import chain, cycle, islice
 from pathlib import Path
 from sys import argv
 import struct
+
+
+def batched(iterable, n):
+    if n < 1:
+        raise ValueError('n must be at least one')
+    iterator = iter(iterable)
+    while batch := tuple(islice(iterator, n)):
+        yield batch
+
+
 file = argv[1]
 outfile = file + ".bin"
 level = Path(file).read_text()

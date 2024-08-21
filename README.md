@@ -8,7 +8,7 @@ Write a program for the robot and reach flags!
 ![Screenshot](static/screenshot.png)
 
 # How to build
-You'll need Python 3 to build the game.
+You'll need Python 3.8+ to build the game.
 ```
 git clone https://github.com/mallo-c/js13k-entry-2024.git
 cd js13k-entry-2024
