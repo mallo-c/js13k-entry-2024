@@ -7,5 +7,5 @@ export default [
     {languageOptions: {globals: globals.browser}},
     pluginJs.configs.recommended,
     ...tseslint.configs.recommended,
-    {ignores: ["dist/*", "build-script/zip.js"]}
+    {ignores: ["dist/*"]}
 ];
