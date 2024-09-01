@@ -1,10 +1,10 @@
-// Because VS Code is an idiot and thinks that "bundle-text:" is undefined
+// Because VS Code thinks that "bundle-text:" is undefined
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="./bundle-text.d.ts" />
 
 import {Level, LevelWithMetadata} from "./level";
 import {API, parse, run, Token, tokenize} from "./run";
-import {standardLevels} from "./standard_levels";
+import {standardLevelsSerialized} from "./standard_levels";
 import showModal from "./modal";
 import {arePointsMatch, delay, Box} from "./utils";
 
@@ -78,6 +78,7 @@ function countCommands(tok: Token[]): number {
 async function startCode() {
     buttons.run.disabled = true;
     buttons.stop.disabled = false;
+    // If an exception is thrown, this variable will contain a human-readable description of the error type
     let errorPrefix: string = "";
     try {
         errorPrefix = "JSK-13 does not understand you: ";
@@ -94,7 +95,7 @@ async function startCode() {
         buttons.stop.disabled = true;
         buttons.run.disabled = false;
         await delay(500);
-        if (standardLevels[currentLevel.$!.id + 1] != undefined && currentLevel.$!.id + 1 != 13)
+        if (standardLevelsSerialized[currentLevel.$!.id + 1] != undefined && currentLevel.$!.id + 1 != 13)
             await showModal("<p>Congratulations, you have reached the flag! Proceed to the next level?</p>", {
                 Go: () => void 0
             });
@@ -109,7 +110,7 @@ async function startCode() {
 
 function resetLevel() {
     const id = currentLevel.$!.id;
-    const lev = Level.deserialize(standardLevels[id]);
+    const lev = Level.deserialize(standardLevelsSerialized[id]);
     currentLevel.$ = {id, ...lev};
     drawLevel();
     patchLevel();
@@ -134,11 +135,11 @@ async function startLevel(id: number) {
     field.innerText = "";
     codeInfo.commandTotal.innerHTML = "&infin;";
     codeInfo.commandCount.innerText = "0";
-    if (standardLevels[id] === undefined) {
+    if (standardLevelsSerialized[id] === undefined) {
         await showModal(next, {});
         return;
     }
-    const lev = Level.deserialize(Uint8Array.from(standardLevels[id]));
+    const lev = Level.deserialize(Uint8Array.from(standardLevelsSerialized[id]));
     currentLevel.$ = {id, ...lev};
     codeInfo.commandTotal.innerText = lev.maxCommands.toString();
     if (id + 1 == 13) {

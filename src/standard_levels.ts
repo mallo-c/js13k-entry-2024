@@ -1,5 +1,5 @@
 import {standardLevel} from "./level_embed" with {type: "macro"};
-export const standardLevels = [
+export const standardLevelsSerialized = [
     standardLevel("1")(),
     standardLevel("2")(),
     standardLevel("3")(),
