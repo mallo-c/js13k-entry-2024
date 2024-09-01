@@ -1,5 +1,5 @@
 import archiver from "archiver";
-import { createWriteStream } from "fs";
+import {createWriteStream} from "fs";
 let arc = archiver("zip", {
     zlib: {level: 9}
 });
