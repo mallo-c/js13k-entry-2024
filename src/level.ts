@@ -57,7 +57,7 @@ export class Level implements API, BaseLevel {
     }
     run(): void {
         const [sin, cos] = this._sinCos(this.position.d);
-        if (!this.scanAhead()) throw new Error("JSK-13 broken");
+        if (!this.scanAhead()) throw new Error("JSK-13 broken down");
         this.position.y -= cos;
         this.position.x += sin;
     }
